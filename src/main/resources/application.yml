@@ -1,0 +1,20 @@
+server:
+  port: 8060
+  
+spring:
+  datasource:
+    password: Sathish@123
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: sathish_ch
+    url: jdbc:sqlserver://localhost:1433;databaseName=mydb;encrypt=true;trustServerCertificate=true;
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect
+    show-sql: false
+    
+#  security:
+#    user:
+#      name: my-user
+#      password: password
+#    roles: USER
