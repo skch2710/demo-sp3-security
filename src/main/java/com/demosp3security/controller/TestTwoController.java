@@ -14,13 +14,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.demosp3security.dao.FileModelDAO;
+import com.demosp3security.dto.EmployeeDetailsDTO;
+import com.demosp3security.dto.EmployeeSearch;
+import com.demosp3security.dto.Result;
 import com.demosp3security.model.FileModel;
+import com.demosp3security.service.EmployeeService;
 import com.demosp3security.util.Utility;
 import com.itextpdf.text.DocumentException;
 
@@ -30,6 +35,21 @@ public class TestTwoController {
 	
 	@Autowired
 	private FileModelDAO fileModelDAO;
+	
+	@Autowired
+	private EmployeeService employeeService;
+
+	@PostMapping("/save-employee")
+	public ResponseEntity<?> saveEmployees(@RequestBody EmployeeDetailsDTO details) {
+		Result result = employeeService.saveEmployee(details);
+		return ResponseEntity.ok(result);
+	}
+	
+	@PostMapping("/search-employees")
+	public ResponseEntity<?> searchEmployee(@RequestBody EmployeeSearch search) {
+		Result result = employeeService.searchEmployee(search);
+		return ResponseEntity.ok(result);
+	}
 
 	@PostMapping(path = "/upload-file", consumes = { "application/json", "multipart/form-data" })
 	public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
