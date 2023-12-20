@@ -90,11 +90,16 @@ public class TestTwoController {
 
 		List<FileModel> fileModels = new ArrayList<>();
 		
+		FileModel fileModel = fileModelDAO.findByFileName("sql.png");
+		
+//		byte[] imageData = Utility.pathToByte("C:\\Users\\skch2\\Downloads\\sql.png");
+		byte[] imageData = Base64.getDecoder().decode(fileModel.getFileData());
+		
 		FileModel excelFileModel = new FileModel();
 		//For Excel
 //		excelFileModel.setFileData(Base64.encode(Utility.createExcel().toByteArray()));
 		excelFileModel.setFileData(Base64.getEncoder().encode(Utility.createExcel().toByteArray()));
-		excelFileModel.setFileName("sample1.xlsx");
+		excelFileModel.setFileName("sample4.xlsx");
 		excelFileModel.setFileType(MediaType.APPLICATION_OCTET_STREAM.toString());
 
 		fileModels.add(excelFileModel);
@@ -102,8 +107,8 @@ public class TestTwoController {
 		FileModel pdfFileModel = new FileModel();
 		//For Pdf
 //		pdfFileModel.setFileData(Base64.encode(Utility.createPdf().toByteArray()));
-		pdfFileModel.setFileData(Base64.getEncoder().encode(Utility.createPdf().toByteArray()));
-		pdfFileModel.setFileName("sample1.pdf");
+		pdfFileModel.setFileData(Base64.getEncoder().encode(Utility.createPdf(imageData).toByteArray()));
+		pdfFileModel.setFileName("sample4.pdf");
 		pdfFileModel.setFileType(MediaType.APPLICATION_PDF.toString());
 		
 		fileModels.add(pdfFileModel);
@@ -112,8 +117,8 @@ public class TestTwoController {
 		
 		//For Zip
 //		zipFileModel.setFileData(Base64.encode(Utility.createZip().toByteArray()));
-		zipFileModel.setFileData(Base64.getEncoder().encode(Utility.createZip().toByteArray()));
-		zipFileModel.setFileName("sample1.zip");
+		zipFileModel.setFileData(Base64.getEncoder().encode(Utility.createZip(imageData).toByteArray()));
+		zipFileModel.setFileName("sample4.zip");
 		zipFileModel.setFileType(MediaType.APPLICATION_OCTET_STREAM.toString());
 		
 		fileModels.add(zipFileModel);
