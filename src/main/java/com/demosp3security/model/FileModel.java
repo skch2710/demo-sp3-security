@@ -19,17 +19,25 @@ public class FileModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="file_id")
+	@Column(name = "file_id")
 	private Long fileId;
 
-	@Column(name="file_name")
+	@Column(name = "file_name")
 	private String fileName;
 
-	@Column(name="file_type")
+	@Column(name = "file_type")
 	private String fileType;
 
 //	@Lob //(No need for pgAdmin)
-	@Column(name="file_data")
-	private byte[] fileData; 
+	@Column(name = "file_data")
+	private byte[] fileData;
 
+	@Column(name = "created_by_id")
+	private Long createdById;
+
+	@Column(name = "version_id")
+	private Long versionId;
+
+	@Column(name = "org_id")
+	private Long orgId;
 }

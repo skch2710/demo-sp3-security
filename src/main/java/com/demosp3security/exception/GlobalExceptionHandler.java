@@ -34,6 +34,25 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
   }
   
   /**
+   * Custom exception handle.
+   *
+   * @param ex the ex
+   * @param request the request
+   * @return the response entity
+   */
+  @ExceptionHandler(Exception.class)
+  public ResponseEntity<ErrorResponse> exceptionHandle(Exception e, WebRequest request) {
+
+    ErrorResponse response = new ErrorResponse();
+    response.setStatusCode(HttpStatus.BAD_REQUEST.value());
+    response.setSuccessMessage(e.getLocalizedMessage());
+    response.setErrorMessage(e.getMessage());
+    return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+
+  }
+
+  
+  /**
    * Access Denied Exception handle.
    *
    * @param edx the edx
